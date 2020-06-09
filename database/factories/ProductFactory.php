@@ -2,11 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Api\v1\Product;
+use App\Product;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-        //
+        'id' => $faker->uuid,
+        'title' => $faker->unique()->word
     ];
 });
