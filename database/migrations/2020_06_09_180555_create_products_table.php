@@ -15,11 +15,11 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('sku');
+            $table->uuid('sku')->unique();
             $table->string('title');
-            $table->text('description');
-            $table->string('color');
-            $table->integer('quantity');
+            $table->text('description')->nullable();
+            $table->string('color')->nullable();
+            $table->integer('quantity')->default(0);
             $table->timestamps();
         });
     }

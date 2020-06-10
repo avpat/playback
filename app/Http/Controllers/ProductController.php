@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductResourceCollection;
-use App\Http\Resources\V1\ProductResource;
+use App\Http\Resources\ProductResource;
 use App\Product;
 
 class ProductController extends Controller
@@ -15,24 +15,16 @@ class ProductController extends Controller
         return new ProductResourceCollection(Product::paginate());
     }
 
-    public function store()
+    public function store(Request $request)
     {
 
-    }
+        $request->validate([
+           'sku'    => 'required',
+           'title'  => 'required'
+        ]);
 
-    public function show($uuid, $quantity): ProductResource
-    {
-        $product = Product::where('id', $uuid)->get();
+        $product = Product::create($request->all());
         return new ProductResource($product);
-    }
-
-    public function update(Product $product): ProductResource
-    {
-        return new ProductResource($product);
-    }
-
-    public function destroy()
-    {
 
     }
 
