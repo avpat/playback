@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Item;
 
 class Cart extends Model
 {
@@ -11,7 +12,11 @@ class Cart extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'sku', 'products', 'quantity','userID'
+        'id', 'key', 'userId', 'sku', 'products', 'quantity'
     ];
 
+    public function items()
+    {
+        $this->hasMany('Item', 'cart_id');
+    }
 }

@@ -15,18 +15,31 @@ class CartController extends Controller
         $request->validate([
             'sku'       => 'required',
             'quantity'  => 'required',
-            'userID'    => 'required'
+            'userId'    => 'required'
         ]);
 
         //check if the sku exists
         if(Product::where('sku', '=', $request->input('sku'))->first())
         {
-            $order = Cart::create($request->all());
+            $cart = Cart::create([
+                'id'        => md5(uniqid(rand(), true)),
+                'key'       => md5(uniqid(rand(), true)),
+                'userId'    => $request->input('userId'),
+                'sku'       => $request->input('sku'),
+                'quantity'  => $request->input('quantity')
+            ]);
+
+            return new CartResource([
+                'Message' => 'Successfully created the cart',
+                'cartId' => $cart->id,
+                'cartKey' => $cart->key,
+            ]);
+
         } else {
-            return response()->json(['error' => 'You need to add the product first'], 500);
+            return response()->json(['error' => 'You need to add the product first'], 403);
         }
 
-        return new CartResource($order);
+
     }
 
 }
