@@ -10,7 +10,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'sku' => $faker->uuid,
         'title' => $faker->word,
         'description'   => $faker->paragraph,
-        'color' => $faker->randomElement(array('RED', 'GREEN', 'BLUE', 'PURPLE')),
-        'quantity'  => $faker->randomDigit
+        'color' => $faker->randomElement(array('RED', 'GREEN', 'YELLOW', 'BLUE', 'PURPLE')),
+        'stock'  => $faker->randomDigit()
     ];
 });

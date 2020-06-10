@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('color')->nullable();
-            $table->integer('quantity')->default(0);
+            $table->integer('stock')->default(0);
             $table->timestamps();
         });
     }
