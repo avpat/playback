@@ -7,7 +7,10 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-        'id' => $faker->uuid,
-        'title' => $faker->unique()->word
+        'sku' => $faker->uuid,
+        'title' => $faker->word,
+        'description'   => $faker->paragraph,
+        'color' => $faker->randomElement(array('RED', 'GREEN', 'BLUE', 'PURPLE')),
+        'quantity'  => $faker->randomDigit
     ];
 });
