@@ -112,18 +112,18 @@ class CartController extends Controller
         $paymentGateway = true;
         $transactionId = md5(uniqid(rand(), true));
         if ($paymentGateway) {
-            $orderId = Order::create([
+            $orders = Order::create([
                 'sku'           => json_encode(new ItemResourceCollection($cartItems)),
                 'totalPrice'    => $totalPrice,
                 'quantity'      => $totalItems,
                 'userId'        => isset($userId) ? $userId : null,
                 'transactionId' => $transactionId
             ]);
-
+            //delete the record from the cart
             Cart::where('userId', $userId)->delete();
             return response()->json([
                 'message'   => 'your order has been completed successfully',
-                'orderId'   => $orderId
+                'orders'   => $orders
             ], 200);
         } else {
             return response()->json([
