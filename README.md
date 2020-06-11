@@ -14,7 +14,7 @@ What is included in this repo?
 <https://www.getpostman.com/collections/4eed44d861eb687dbfde>
 
 Installation instructions
-1. Clone the repo via this url git@https://github.com/swaami/simplestream-api-test
+1. Clone the repo via this url git@https://github.com/swaami/playback
 2. Get inside the project folder and run ``composer update``
 3. Create a .env file by running the following command cp .env.example .env. Update your database credentials inside this .env file.
 4. Install various packages and dependencies: composer install. Note: you have to be inside your Laravel development environment for this to work. 
