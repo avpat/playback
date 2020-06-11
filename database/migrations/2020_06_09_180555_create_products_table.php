@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('sku')->unique();
             $table->string('title');
+            $table->decimal('price');
             $table->text('description')->nullable();
             $table->string('color')->nullable();
             $table->integer('stock')->default(0);
