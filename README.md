@@ -1,85 +1,101 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## Code Test
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
 
-## About Laravel
+What is included in this repo?
+- Completed code
+- EER diagram
+- Postman file [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4eed44d861eb687dbfde)
+- Database migrations and seedrs
+- basic unit tests
+- Installation guide (docker, laravel and database)
+- .env files will be emailed to you(if needed)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**if above postman button doesn't work then please let me know**
+<https://www.getpostman.com/collections/4eed44d861eb687dbfde>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Installation instructions
+1. Clone the repo via this url git@https://github.com/swaami/simplestream-api-test
+2. Get inside the project folder and run ``composer update``
+3. Create a .env file by running the following command cp .env.example .env. Update your database credentials inside this .env file.
+4. Install various packages and dependencies: composer install. Note: you have to be inside your Laravel development environment for this to work. 
+5. Run `` docker-compose build && docker-compose up -d`` (please refer to section below if any problem persists)
+5. Generate an encryption key for the app: php artisan key:generate.
+6. Run migrations and seed database with some sample data: php artisan migrate:refresh --seed.
+7. You are now good to go.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+##Additional Information: 
 
-## Learning Laravel
+The project uses following environment 
+- docker -- linux, apache, mysql, nginx, php 7.4
+- Laravel 7
+- composer
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Composer Libraries
+- codesniffer
+- goldspecdigital/laravel-eloquent-uuid
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+##Docker Installation(optional)
+- In case, you do not have docker or vagrant installed then follow these steps. If you've working environment then simply ignore docker installation steps and ``docker-compose exec php`` from all command below. 
+- Run a docker desktop on your machine
+- Goto your development folder and download this code
+- Run a docker build command and it should copy all the required images
+`` docker-compose build && docker-compose up -d``
+- Check if the docker container is running with following command
+``docker-compose ps``
+- If any issue occurs execute ``docker-compose down -v `` and then once again execute `` docker-compose build && docker-compose up -d``
+- if any issue occurs check folder perssions from the docker desktop
+- if everything ok then execute ``docker-compose exec php php artisan config:cache``
 
-## Laravel Sponsors
+##composer(already added these packages)
+- add code sniffer for psr12 standards checking
+``composer require squizlabs/php_codesniffer --dev``
+- to check PSR12 standards run ``./vendor/bin/phpcs app/ --standard=PSR12``
+- for uuid generation package, please run following command 
+``composer require goldspecdigital/laravel-eloquent-uuid:^7.0``
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+##Create Database
+- the database connection details can be found in the .env file at the root folder
+- This project uses mysql(for given task) and sqlite(for unit testing). 
+- create a user on the mysql by executing following command ``docker-compose exec mysql bash``
+- Login to mysql bash here with ``mysql -u root -p``. 
+- The password is the word `secret`
+- ``create database simplestream;``
+- ``GRANT ALL PRIVILEGES ON `simplestream`.* TO 'homestead'@'localhost';``
+- ``exit``
 
-### Premium Partners
+##Migrate and seed database
+- The factory and migration files are provided along with this repo
+- to run the migrations, run 
+``docker-compose exec php php artisan migrate``
+- Then seed
+``    docker-compose exec php php artisan db:seed``
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
+If you face any issue with migrate and seeding then follow these steps
+- Rollback 
+``docker-compose exec php php artisan migrate:rollback``
+``composer dump-autoload``
+``docker-compose exec php php artisan migrate:refresh --seed``
 
-### Community Sponsors
 
-<a href="https://op.gg"><img src="http://opgg-static.akamaized.net/icon/t.rectangle.png" width="150"></a>
+##ENDPOINT
 
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [云软科技](http://www.yunruan.ltd/)
+>GET /v1/product
 
-## Contributing
+>POST /v1/product/:sku/:title
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+>POST /v1/cart/:sku/:quantity/:userId
 
-## Code of Conduct
+>GET /v1/cart/checkout/:userId
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+# Installation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Install the dependencies and start the server to test the Api.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```sh
+$ Composer install
+$ php artisan key:generate
+$ php artisan migrate
+$ php artisan passport:install
+$ php artisan db:seed
+```
