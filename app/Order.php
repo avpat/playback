@@ -14,6 +14,4 @@ class Order extends Model
     protected $fillable = [
         'sku', 'products', 'quantity','userId'
     ];
-
-
 }

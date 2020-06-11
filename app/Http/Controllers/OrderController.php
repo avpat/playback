@@ -8,11 +8,10 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\Product;
 
-
 class OrderController extends Controller
 {
 
-    public function index():OrderResourceCollection
+    public function index(): OrderResourceCollection
     {
         return new OrderResourceCollection(Order::paginate());
     }
@@ -27,8 +26,7 @@ class OrderController extends Controller
         ]);
 
         //check if the sku exists
-        if(Product::where('sku', '=', $request->input('sku'))->first())
-        {
+        if (Product::where('sku', '=', $request->input('sku'))->first()) {
             $order = Order::create($request->all());
         } else {
             return response()->json(['error' => 'You need to add the product first'], 500);
@@ -36,5 +34,4 @@ class OrderController extends Controller
 
         return new OrderResource($order);
     }
-
 }
