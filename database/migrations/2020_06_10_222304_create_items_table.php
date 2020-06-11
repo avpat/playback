@@ -15,11 +15,11 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->string('cart_id');
-            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('sku');
             $table->unsignedInteger('quantity');
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->primary(array('cart_id', 'product_id'));
+            $table->foreign('sku')->references('id')->on('products')->onDelete('cascade');
+            $table->primary(array('cart_id', 'sku'));
             $table->timestamps();
         });
     }

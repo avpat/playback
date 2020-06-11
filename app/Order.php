@@ -12,7 +12,7 @@ class Order extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'sku', 'products', 'quantity','userID'
+        'sku', 'products', 'quantity','userId'
     ];
 
 

@@ -22,6 +22,7 @@ class ProductController extends Controller
            'sku'    => 'required',
            'title'  => 'required'
         ]);
+            //check if the numbers are digits
 
         $product = Product::create($request->all());
         return new ProductResource($product);

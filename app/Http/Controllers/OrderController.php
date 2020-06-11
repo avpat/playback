@@ -23,7 +23,7 @@ class OrderController extends Controller
         $request->validate([
             'sku'       => 'required',
             'quantity'  => 'required',
-            'userID'    => 'required'
+            'userId'    => 'required'
         ]);
 
         //check if the sku exists

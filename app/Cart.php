@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Item;
 
 class Cart extends Model
 {
@@ -17,6 +16,6 @@ class Cart extends Model
 
     public function items()
     {
-        $this->hasMany('Item', 'cart_id');
+        return $this->hasMany('App\Item', 'cart_id');
     }
 }

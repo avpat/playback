@@ -12,5 +12,7 @@ Route::prefix('v1')->group(function (){
 
     Route::apiResource('/order', 'OrderController')
         ->only(['index', 'store']);
+
+    Route::post('/cart/checkout', 'CartController@checkout');
 });
 

@@ -17,7 +17,7 @@ class CreateCartsTable extends Migration
             $table->string('id');
             $table->string('key');
             $table->unsignedInteger('userId');
-            $table->string('sku');
+            $table->integer('sku');
             $table->integer('quantity');
             $table->timestamps();
             $table->primary('id');
