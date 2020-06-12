@@ -59,8 +59,8 @@ The project uses following environment
 - create a user on the mysql by executing following command ``docker-compose exec mysql bash``
 - Login to mysql bash here with ``mysql -u root -p``. 
 - The password is the word `secret`
-- ``create database simplestream;``
-- ``GRANT ALL PRIVILEGES ON `simplestream`.* TO 'homestead'@'localhost';``
+- ``create database playbackstudio;``
+- ``GRANT ALL PRIVILEGES ON `playbackstudio`.* TO 'homestead'@'localhost';``
 - ``exit``
 
 ##Migrate and seed database
